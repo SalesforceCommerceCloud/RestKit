@@ -176,11 +176,13 @@ return __VA_ARGS__;                                                             
     if ([[space authenticationMethod] isEqualToString:NSURLAuthenticationMethodServerTrust]) {
         // server is using an SSL certificate that the OS can't validate
         // see whether the client settings allow validation here
-        if (_request.disableCertificateValidation || [_request.additionalRootCertificates count] > 0) {
-            return YES;
-        } else {
-            return NO;
-        }
+        //DW_HACK: temporary hack to handle self-signed certificate
+//        if (_request.disableCertificateValidation || [_request.additionalRootCertificates count] > 0) {
+//            return YES;
+//        } else {
+//            return NO;
+//        }
+		return YES;
     }
 
     // Handle non-SSL challenges
