@@ -274,7 +274,7 @@ static dispatch_queue_t defaultMappingQueue = nil;
     if (objectMapping == nil || ([objectMapping isKindOfClass:[RKObjectMapping class]] && [object isMemberOfClass:[(RKObjectMapping *)objectMapping objectClass]])) {
         loader.targetObject = object;
     } else {
-        loader.targetObject = [[(RKObjectMapping *) ObjectMapping ObjectClass] new];
+        loader.targetObject = [[(RKObjectMapping *) objectMapping  objectClass] new];
     }
 
     return loader;
