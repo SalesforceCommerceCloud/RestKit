@@ -148,8 +148,7 @@ return __VA_ARGS__;                                                             
 
     if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
         SecTrustRef trust = [[challenge protectionSpace] serverTrust];
-        //DW_HACK: temporary hack to handle self-signed certificate
-        if ( /*YES ||*/ [self isServerTrusted:trust]) {
+        if ([self isServerTrusted:trust]) {
             [challenge.sender useCredential:[NSURLCredential credentialForTrust:trust] forAuthenticationChallenge:challenge];
         } else {
             [[challenge sender] cancelAuthenticationChallenge:challenge];
@@ -177,13 +176,11 @@ return __VA_ARGS__;                                                             
     if ([[space authenticationMethod] isEqualToString:NSURLAuthenticationMethodServerTrust]) {
         // server is using an SSL certificate that the OS can't validate
         // see whether the client settings allow validation here
-        //DW_HACK: temporary hack to handle self-signed certificate
         if (_request.disableCertificateValidation || [_request.additionalRootCertificates count] > 0) {
             return YES;
         } else {
             return NO;
         }
-		return YES;
     }
 
     // Handle non-SSL challenges
