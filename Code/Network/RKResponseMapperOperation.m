@@ -261,7 +261,7 @@ static dispatch_queue_t RKResponseMapperSerializationQueue() {
     // Parse the response
     NSError *error;
     id parsedBody = [self parseResponseData:&error];
-#ifndef NDEBUG
+#ifdef DW_RESTKIT_LOGGING
     NSLog(@"Response Body:\n%@", parsedBody);
 #endif
     if (self.isCancelled) return;

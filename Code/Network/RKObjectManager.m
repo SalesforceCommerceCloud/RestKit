@@ -362,7 +362,7 @@ static NSString *RKMIMETypeFromAFHTTPClientParameterEncoding(AFHTTPClientParamet
         NSString *charset = (__bridge NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.HTTPClient.stringEncoding));
         [request setValue:[NSString stringWithFormat:@"%@; charset=%@", self.requestSerializationMIMEType, charset] forHTTPHeaderField:@"Content-Type"];
         NSData *requestBody = [RKMIMETypeSerialization dataFromObject:parameters MIMEType:self.requestSerializationMIMEType error:&error];
-#ifndef NDEBUG
+#ifdef DW_RESTKIT_LOGGING
         NSString* requestBodyString = [[NSString alloc] initWithData:requestBody encoding:NSUTF8StringEncoding];
         NSLog(@"Request Body:\n%@", requestBodyString);
 #endif
